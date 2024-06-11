@@ -1,17 +1,18 @@
-import React, { Fragment } from "react";
+// TodoItem.js
+import React from 'react';
 
-export function TodoItem({todo, cambiarEstado}){
-    const {id, completed, task} = todo;
-
-    const fnCambiarEstado = () => {
-        cambiarEstado(id);
-    }
-    return(
-        <Fragment>
-            <li className="list-group-item">
-                <input onChange={fnCambiarEstado} type="checkbox" checked={completed} className="form-check-input me-2"/>
-                {task}
-            </li>
-        </Fragment>
-    )
+export function TodoItem({ todo, cambiarEstado, borrarTarea }) {
+    return (
+        <li className="list-group-item d-flex justify-content-between align-items-center">
+            <span
+                style={{ textDecoration: todo.completed ? 'line-through' : 'none' }}
+                onClick={() => cambiarEstado(todo.id)}
+            >
+                {todo.task} - {todo.etiqueta}
+            </span>
+            <button className="btn btn-danger" onClick={() => borrarTarea(todo.id)}>
+                Borrar
+            </button>
+        </li>
+    );
 }
